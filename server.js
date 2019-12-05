@@ -9,15 +9,15 @@ var db = new sqlite3.Database('mydb.db');
 var check;
 db.serialize(function() {
 
-  db.run("CREATE TABLE if not exists user_info (info TEXT)");
-  var stmt = db.prepare("INSERT INTO user_info VALUES (?)");
+  db.run("CREATE TABLE IF NOT EXISTS User_info (pseudo TEXT PRIMARY KEY, passwd TEXT, role TEXT)");
+  var stmt = db.prepare("INSERT INTO User_info VALUES (?, ?, ?)");
   for (var i = 0; i < 10; i++) {
-      stmt.run("Ipsum " + i);
+      stmt.run("user" + i, "pass" + i, "utilisateur");
   }
   stmt.finalize();
 
-  db.each("SELECT rowid AS id, info FROM user_info", function(err, row) {
-      console.log(row.id + ": " + row.info);
+  db.each("SELECT pseudo, passwd, role FROM User_info", function(err, row) {
+      console.log(row.pseudo + ": " + row.paswd + ", " + row.role);
   });
 });
 
