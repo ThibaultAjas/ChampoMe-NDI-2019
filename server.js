@@ -7,17 +7,17 @@ const io = require('socket.io')(server);
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('mydb.db');
 var check;
-
 db.serialize(function() {
-  db.run("CREATE TABLE if not exists User_info (pseudo VARCHAR(20) PRIMARY KEY, passwd VARCHAR(255), role VARCHAR(30))");
-  var stmt = db.prepare("INSERT INTO User_info VALUES (pseudo, passwd)");
+
+  db.run("CREATE TABLE if not exists user_info (info TEXT)");
+  var stmt = db.prepare("INSERT INTO user_info VALUES (?)");
   for (var i = 0; i < 10; i++) {
-    stmt.run("user" + i, "passUser" + i);
+      stmt.run("Ipsum " + i);
   }
   stmt.finalize();
 
-  db.each("SELECT pseudo AS name, passwd FROM User_info", function(err, row) {
-    console.log(row.name + ": " + row.passwd);
+  db.each("SELECT rowid AS id, info FROM user_info", function(err, row) {
+      console.log(row.id + ": " + row.info);
   });
 });
 
