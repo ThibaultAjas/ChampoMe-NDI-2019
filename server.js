@@ -17,7 +17,7 @@ db.serialize(function() {
   stmt.finalize();
 
   db.each("SELECT pseudo, passwd, role FROM User_info", function(err, row) {
-      console.log(row.pseudo + ": " + row.paswd + ", " + row.role);
+      console.log(row.pseudo + ": " + row.passwd + ", " + row.role);
   });
 });
 
