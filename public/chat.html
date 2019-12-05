@@ -1,0 +1,75 @@
+<!doctype html>
+
+<html>
+
+<head> 
+<meta charset="UTF-8">
+</head>
+<script src="resources/socket.io-client/dist/socket.io.js"></script>
+<script src="resources/jquery/dist/jquery.js"></script>
+<script src="resources/bootstrap/dist/js/bootstrap.js"></script>
+<link rel="stylesheet" href="resources/bootstrap/dist/css/bootstrap.css"></script>
+
+<body>
+	 <div class="container-flude">
+    	
+                <div class="msg-group center">
+                	
+                    <div class="card">
+                         <div class="card-body">
+                             <h6 class="card-subtitle mb-2 text-muted text-left">yingshaoxo</h6>
+                             <p class="card-text float-left">Hi ~</p>
+                         </div>
+                    </div>
+                      
+                    <div class="card">
+                         <div class="card-body">
+                             <h6 class="card-subtitle mb-2 text-muted text-right">yingshaoxo</h6>
+                             <p class="card-text float-right">Welcome to here!</p>
+                         </div>
+                    </div>                      
+                   
+                </div>
+                
+                <div class="input-group">
+                	<form id="chatForm"
+                	<textarea id="input-box" class="form-control" rows="1" placeholder="Say something..."></textarea>
+                    <span class="input-group-btn">
+                        <button class="btn btn-secondary" type="button">send</button>
+                    </span>
+               </div>
+              
+    </div>
+
+	<div id="chatDiv" > </div>
+    <FORM id="form1">
+    <TEXTAREA id="txtZone" name="entreeChat" rows=4 cols=40>Entrez votre texte ...</TEXTAREA>
+	<input type="submit"> Envoyer </submit>
+    </FORM>
+</body>
+
+
+
+
+
+<script>
+
+	var socket = io();
+	
+	var textZone = $('#txtZone');
+	socket.on('printLog', function(data) {
+		console.log(data);	
+	});
+	
+	$('#form1').on('submit', function(e){
+		e.preventDefault();
+		var msg = textZone.val();
+		socket.emit('evt1', { id:0, message:msg });
+		console.log(msg);
+	});
+	
+</script>
+
+</html>
+
+
