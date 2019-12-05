@@ -12,14 +12,16 @@ io.on('connection', function(client) {
 	console.log('New user is connected');
 	client.emit('greeting', {id:0, time: new Date()});
 	//io.emit()
-});
-
-io.on('clickEvent', function(data) {
+client.on('evt1', function(data) {
+	console.log('Chat event');
 	console.log(data);
-	io.emit('greeting', [0,1,2,3]);
+	console.log(data.message);
+	io.emit('greeting', "Message reçu");
 });
-
-server.listen(8080);
+});
+server.listen(8080, function() {
+	console.log('Server running on port 8080');
+});
 
 
 /*

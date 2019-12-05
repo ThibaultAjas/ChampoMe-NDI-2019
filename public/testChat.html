@@ -9,9 +9,9 @@
 <script src="resources/jquery/dist/jquery.js"></script>
 
 <body>
-    <FORM>
+    <FORM id="form1">
     <TEXTAREA id="txtZone" name="entreeChat" rows=4 cols=40>Entrez votre texte ...</TEXTAREA>
-	<button id="sendMsg"> Envoyer </button>
+	<input type="submit"> Envoyer </submit>
     </FORM>
 
 <h1>Hello World</h1>
@@ -23,24 +23,21 @@
 
 
 <script>
-	var socket = io.connect('http://51.83.252.165:8080');
+	var socket = io();
+	
 	var textZone = $('#txtZone');
 	socket.on('greeting', function(data) {
 
 		console.log(data);	
 	});
 	
-	$('#sendMsg').on('click', function(){
+	$('#form1').on('submit', function(e){
+		e.preventDefault();
 		var msg = textZone.val();
-		socket.emit('clickEvent', { id:0, message:"message envoyé" });
+		socket.emit('evt1', { id:0, message:msg });
 		console.log(msg);
 	});
-	/*
-	$('p').click(function() {
-
-		socket.emit('clickEvent', { id:0, message:"j'ai cliqué" });
-	});*/
-
+	
 </script>
 
 </html>
