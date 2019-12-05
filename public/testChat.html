@@ -9,13 +9,11 @@
 <script src="resources/jquery/dist/jquery.js"></script>
 
 <body>
+	<div id="chatDiv" > </div>
     <FORM id="form1">
     <TEXTAREA id="txtZone" name="entreeChat" rows=4 cols=40>Entrez votre texte ...</TEXTAREA>
 	<input type="submit"> Envoyer </submit>
     </FORM>
-
-<h1>Hello World</h1>
-<p>click me</p>
 </body>
 
 
@@ -23,11 +21,11 @@
 
 
 <script>
+
 	var socket = io();
 	
 	var textZone = $('#txtZone');
-	socket.on('greeting', function(data) {
-
+	socket.on('printLog', function(data) {
 		console.log(data);	
 	});
 	

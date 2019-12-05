@@ -5,19 +5,17 @@ const io      = require('socket.io')(server);
 
 
 app.use(express.static('public'));
-
 app.use('/resources', require('express').static(__dirname + '/node_modules/'));
 
 io.on('connection', function(client) {
 	console.log('New user is connected');
-	client.emit('greeting', {id:0, time: new Date()});
-	//io.emit()
-client.on('evt1', function(data) {
-	console.log('Chat event');
-	console.log(data);
-	console.log(data.message);
-	io.emit('greeting', "Message reçu");
-});
+
+	client.on('evt1', function(data) {
+		console.log('Chat event');
+		console.log(data);
+		console.log(data.message);
+		io.emit('printLog', "Message reçu");
+	});
 });
 server.listen(8080, function() {
 	console.log('Server running on port 8080');
