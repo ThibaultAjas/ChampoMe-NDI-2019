@@ -1,0 +1,28 @@
+<html>
+<script src="resources/socket.io-client/dist/socket.io.js"></script>
+<script src="resources/jquery/dist/jquery.js"></script>
+
+<body>
+
+<h1>Hello World</h1>
+<p>click me</p>
+</body>
+
+<script>
+	var socket = io.connect('http://51.83.252.165:8080');
+
+	socket.on('greeting', function(data) {
+
+		console.log(data);	
+	});
+
+	$('p').click(function() {
+
+		socket.emit('clickEvent', { id:0, message:"j'ai cliqué" });
+	});
+
+</script>
+
+</html>
+
+
