@@ -1,0 +1,48 @@
+<!doctype html>
+
+<html>
+
+<head> 
+<meta charset="UTF-8">
+</head>
+<script src="resources/socket.io-client/dist/socket.io.js"></script>
+<script src="resources/jquery/dist/jquery.js"></script>
+
+<body>
+    <FORM>
+    <TEXTAREA id="txtZone" name="entreeChat" rows=4 cols=40>Entrez votre texte ...</TEXTAREA>
+	<button id="sendMsg"> Envoyer </button>
+    </FORM>
+
+<h1>Hello World</h1>
+<p>click me</p>
+</body>
+
+
+
+
+
+<script>
+	var socket = io.connect('http://51.83.252.165:8080');
+	var textZone = $('#txtZone');
+	socket.on('greeting', function(data) {
+
+		console.log(data);	
+	});
+	
+	$('#sendMsg').on('click', function(){
+		var msg = textZone.val();
+		socket.emit('clickEvent', { id:0, message:"message envoyé" });
+		console.log(msg);
+	});
+	/*
+	$('p').click(function() {
+
+		socket.emit('clickEvent', { id:0, message:"j'ai cliqué" });
+	});*/
+
+</script>
+
+</html>
+
+
