@@ -31,12 +31,14 @@ io.on('connection', function(client) {
 
       let sql = 'SELECT pseudo FROM User_info WHERE pseudo=? AND passwd=?';
 
-      db.all(sql, [data.pseudo, data.passwd], function(err, rows) {
+      db.all(sql, [data.pseudo, data.password], function(err, rows) {
         if (err) {
           return console.error(err.message);
         }
         console.log("data:");
-        console.log(data);
+        console.log(data.pseudo);
+        console.log("data:");
+        console.log(data.password);
         console.log("rows");
         console.log(rows);
       });
