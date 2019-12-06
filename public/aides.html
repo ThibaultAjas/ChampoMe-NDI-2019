@@ -1,0 +1,68 @@
+<!doctype html>
+
+<html>
+<style>
+    .container {
+        padding-top: 1px;
+    }
+</style>
+<header></header>
+
+<body>
+    
+    <div class="container my-4 mx-4">
+        <div class="row my-4">
+            <div class="col">
+                <div class="card bg-info">
+                    <div class="card-body">
+                        <h4 class="card-title">APL</h4>
+                        <p class="card-text">ICI COMMENT APL</p>
+                        <a href="#" class="card-link">ici lien vers site caf</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row my-4">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">APL</h4>
+                        <p class="card-text">ICI COMMENT APL</p>
+                        <a href="#" class="card-link">ici lien vers site caf</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<script src="resources/socket.io-client/dist/socket.io.js"></script>
+<script src="resources/jquery/dist/jquery.js"></script>
+<script src="resources/bootstrap/dist/js/bootstrap.js"></script>
+<script>
+
+    fetch("header.html")
+      .then(response => {
+        return response.text()
+      })
+      .then(data => {
+        document.querySelector("header").innerHTML = data;
+    });
+
+    fetch("footer.html")
+      .then(response => {
+        return response.text()
+      })
+      .then(data => {
+        document.querySelector("footer").innerHTML = data;
+    });
+</script>
+<script>
+
+    
+</script>
+</body>
+<footer></footer>
+</html>
+
+
