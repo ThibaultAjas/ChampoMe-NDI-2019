@@ -27,8 +27,9 @@ app.use(session({
   saveUninitialized: true
 }));
 
-io.use((socket, next) => {
-  let handshake = socket.handshake;
+io.use(function(socket, next) {
+  var handshake = socket.request;
+  next();
 });
 
 io.on('connection', function(client) {
