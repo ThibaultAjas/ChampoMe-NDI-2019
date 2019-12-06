@@ -35,27 +35,33 @@ io.on('connection', function(client) {
         if (err) {
           return console.error(err.message);
         }
-        console.log("data:");
-        console.log(data.pseudo);
-        console.log("data:");
-        console.log(data.password);
-        console.log("rows");
-        console.log(rows);
+        if (rows.length == 1) { // La combinaison pseudo/password existe dans la DB
+          // On crée une session
+          app.use(session({
+            secret: 'keyboard cat',
+            pseudo: data.pseudo,
+            cookie: {
+              maxAge: 600000
+            } // En ms
+          }));
+        } // Sinon on ne crée pas de session
       });
     });
 
   });
-  // Si c'est correct, lancer la session
 
-  client.on('evt1', function(data) {
-    console.log('Chat event');
-    console.log(data);
-    console.log(data.message);
-    client.emit('printLog', "Message reçu");
-    io.emit('majChat', data);
+  app.get('/', function(req, res, next) {
+    if (req.session.views) {
+      // Si la session existe:
+      client.on('evt1', function(data) {
+        console.log(data);
+        data.pseudo = req.session.pseudo;
+        console.log(data);
+        io.emit('majChat', data);
+      });
+    } // Sinon:
   });
 
-  // Sinon dire au client d'aller se faire foutre
 });
 
 server.listen(8080, function() {
