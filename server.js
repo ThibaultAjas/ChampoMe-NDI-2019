@@ -29,13 +29,12 @@ app.use(session({
 
 io.use((socket, next) => {
   let handshake = socket.handshake;
-  let sessionID = socket.sessionID;
 });
 
 io.on('connection', function(client) {
   // Comparer les infos à la BD
   // const uniqueId = uuid();
-  let sessionID = client.sessionID;
+  let handshake = client.handshake;
   console.log('New user is connected');
   console.log(sessionID);
   client.on('evtConnexion', function(data) {
