@@ -19,7 +19,7 @@
       </form>
     </div>
 
-    <div class="row justify-content-center align-items-center">
+    <div class="row justify-content-center align-items-center" style="width: 20%">
       <input type="text" id="pseudo" class="form-control" placeholder="Pseudonyme" value="" />
     </div>
 
@@ -62,7 +62,7 @@
         chatArea.append(newCard);
         var cardContent = $('<div class = "card-body"></div>');
         newCard.append(cardContent);
-        cardContent.html(cardContent.html() + data.pseudo + ": " + data.message);
+        cardContent.html(cardContent.html() + data.pseudo + " : " + data.message);
 
       });
 

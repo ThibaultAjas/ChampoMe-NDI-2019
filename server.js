@@ -25,7 +25,6 @@ io.on('connection', function(client) {
         } // on est censé ne pas en céer (et de toute façon on en crée pas, doc c'est plutot bien réussi pour cette partie)
       });
     });
-
   });
 
   client.on('evt1', function(data) {
