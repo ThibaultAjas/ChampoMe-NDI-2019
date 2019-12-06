@@ -4,6 +4,7 @@ const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const uuid = require('uuid/v4');
 
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('mydb.db');
@@ -21,11 +22,28 @@ app.use(session({
 app.use(function(req, res) {
   res.end('<h2>Hello, your session id is ' + req.sessionID + '</h2>');
   console.log(req.sessionID);
-  console.log(req.session.keys);
+});
+
+io.set('authorization', function(data, accept) {
+  // check if there's a cookie header
+  if (data.headers.cookie) {
+    // if there is, parse the cookie
+    data.cookie = parseCookie(data.headers.cookie);
+    // note that you will need to use the same key to grad the
+    // session id, as you specified in the Express setup.
+    data.sessionID = data.cookie['express.sid'];
+  } else {
+    // if there isn't, turn down the connection with a message
+    // and leave the function.
+    return accept('No cookie transmitted.', false);
+  }
+  // accept the incoming connection
+  accept(null, true);
 });
 
 io.on('connection', function(client) {
   console.log('New user is connected');
+  onsole.log('A socket with sessionID ' + client.handshake.sessionID + ' connected!');
 });
 
 
