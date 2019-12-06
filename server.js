@@ -28,9 +28,13 @@ io.on('connection', function(client) {
     console.log('Session evt');
 
     db.serialize(function() {
+
       let sql = 'SELECT pseudo FROM User_info WHERE pseudo=? AND passwd=?';
+
       db.all(sql, [data.pseudo, data.passwd], function(err, rows) {
-        if (err) throw err;
+        if (err) {
+          return console.error(err.message);
+        }
         console.log("data:");
         console.log(data);
         console.log("rows");
