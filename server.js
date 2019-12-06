@@ -2,11 +2,6 @@ const express = require('express');
 const app = express();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
-const session = require('express-session');
-const cookieParser = require('cookie-parser');
-const FileStore = require('session-file-store')(session);
-
-const uuid = require('uuid/v4');
 
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('mydb.db');
@@ -14,30 +9,9 @@ const db = new sqlite3.Database('mydb.db');
 app.use(express.static('public'));
 app.use('/resources', require('express').static(__dirname + '/node_modules/'));
 
-// add & configure middleware
-app.use(session({
-  genid: (req) => {
-    console.log('Inside the session middleware')
-    console.log(req.sessionID)
-    return uuid() // use UUIDs for session IDs
-  },
-  store: new FileStore(),
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: true
-}));
-
-io.use(function(socket, next) {
-  var handshake = socket.request;
-  next();
-});
-
 io.on('connection', function(client) {
   // Comparer les infos à la BD
-  // const uniqueId = uuid();
-  let handshake = client.handshake;
   console.log('New user is connected');
-  console.log(handshake);
   client.on('evtConnexion', function(data) {
     console.log('Session evt');
 
