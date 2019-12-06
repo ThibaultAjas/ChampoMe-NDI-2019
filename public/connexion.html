@@ -1,0 +1,62 @@
+<!doctype html>
+
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+  </head>
+  <script src="resources/socket.io-client/dist/socket.io.js"></script>
+  <script src="resources/jquery/dist/jquery.js"></script>
+
+  <body>
+
+    <form id="loginForm">
+      <input type="text" id="pseudo" required></input>
+      <input type="password" id="passwd" required></input>
+      <input type="submit" value="Connexion">
+    </form>
+
+    <div id="chatDiv">
+    </div>
+
+    <form id="chatForm">
+      <textarea id="txtZone" name="entreeChat" rows=4 cols=40 placeholder="Entrez votre texte ..."></textarea>
+      <input type="submit" value="Envoyer"></input>
+    </form>
+
+  </body>
+
+  <script>
+    var socket = io();
+    var textZone = $('#txtZone');
+    var chatDiv = $('#chatDiv');
+
+    $('#loginForm').on('submit', function(e) {
+      e.preventDefault();
+      var pseudo = $('#pseudo').val();
+      var passwd = $('#passwd').val();
+      socket.emit('evtConnexion', {pseudo:pseudo, password: passwd})
+    });
+
+    socket.on('printLog', function(data) {
+      console.log(data);
+    });
+
+    socket.on('majChat', function(data) {
+      console.log("majChat");
+      console.log(data);
+      chatDiv.html(chatDiv.html() + "<br/>" + data.pseudo + ": " + data.message);
+    });
+
+    $('#chatForm').on('submit', function(e) {
+      e.preventDefault();
+      var msg = textZone.val();
+      socket.emit('evt1', {
+        pseudo: "Me",
+        message: msg
+      });
+      console.log(msg);
+    });
+  </script>
+
+</html>
