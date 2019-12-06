@@ -13,7 +13,7 @@ var sess = {
   },
   secret: 'L\'ennui de l\'info 2019',
   pseudo: '',
-  cookie {
+  cookie: {
     secure: true,
     maxAge: 600000 // En ms
   }
