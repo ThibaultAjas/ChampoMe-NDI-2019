@@ -44,6 +44,7 @@ io.on('connection', function(client) {
               maxAge: 600000
             } // En ms
           }));
+          console.log(data);
         } // Sinon on ne crée pas de session
       });
     });
@@ -51,6 +52,7 @@ io.on('connection', function(client) {
   });
 
   app.get('/', function(req, res, next) {
+    console.log("app.get()");
     if (req.session.views) {
       // Si la session existe:
       client.on('evt1', function(data) {
@@ -66,7 +68,4 @@ io.on('connection', function(client) {
 
 server.listen(8080, function() {
   console.log('Server running on port 8080');
-  db.each("SELECT * FROM User_info", function(err, row) {
-    console.log(row);
-  });
 });
