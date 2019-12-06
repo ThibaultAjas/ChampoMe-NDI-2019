@@ -1,0 +1,86 @@
+<!doctype html>
+
+<html>
+<style>
+    .container {
+        padding-top: 1px;
+    }
+</style>
+<header></header>
+
+<body>
+    
+    <div class="container my-4 mx-4 bg-info">
+        <div class="row my-4">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header h3">
+                        Logement
+                    </div>
+                    <div class="card-body">
+                        
+                        <p class="card-text">L’assurance habitation est indispensable pour vous couvrir des aléas de la vie quotidienne. Elle vous permet d’être indemnisé par votre compagnie d’assurance en cas de sinistre dans votre logement.
+Pour qu’il soit efficace, un contrat d’assurance habitation doit être clair et compris par l’assuré avant d’être souscrit. En effet, les clauses d’application et d’exclusion doivent être clairement mentionnées sur le contrat, au risque de ne pas être applicables.</p>
+                        <a href="https://www.homunity.com/fr/blog/immobilier/pourquoi-souscrire-une-assurance-habitation" class="card-link">Plus d'informations</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row my-4">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header h3">
+                        Voiture
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Au même titre que vous devez avoir votre permis de conduire pour conduire une voiture, assurer son véhicule est une obligation légale, dont le défaut représente un délit pénal punit d’une amende pouvant aller jusqu’à 3 750 €, assortie éventuellement d’une suspension de permis de conduire de trois ans, ou de la confiscation du véhicule et d’autres peines complémentaires telle que l’obligation d’accomplir, à vos frais, un stage de sensibilisation à la sécurité routière.</p>
+                        <a href="https://www.economie.gouv.fr/particuliers/assurance-automobile" class="card-link">Plus d'informations</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row my-4">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header h3">
+                        Complémentaire santé solidaire
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">La complémentaire santé solidaire (CSS) vous donne droit à la prise en charge de la part complémentaire de vos dépenses de santé. Elle remplace la couverture maladie universelle complémentaire (CMU-C) et est ouverte aux bénéficiaires de l'aide pour une complémentaire santé (ACS). Pour en bénéficier, il ne faut pas dépasser un certain montant de ressources. Au-delà, une participation pourra vous être demandée. Cette participation sera différente en fonction de votre âge. </p>
+                        <a href="https://www.service-public.fr/particuliers/vosdroits/F10027" class="card-link">Plus d'informations</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+<script src="resources/socket.io-client/dist/socket.io.js"></script>
+<script src="resources/jquery/dist/jquery.js"></script>
+<script src="resources/bootstrap/dist/js/bootstrap.js"></script>
+<script>
+
+    fetch("header.html")
+      .then(response => {
+        return response.text()
+      })
+      .then(data => {
+        document.querySelector("header").innerHTML = data;
+    });
+
+    fetch("footer.html")
+      .then(response => {
+        return response.text()
+      })
+      .then(data => {
+        document.querySelector("footer").innerHTML = data;
+    });
+</script>
+<script>
+
+    
+</script>
+</body>
+<footer></footer>
+</html>
+
+
