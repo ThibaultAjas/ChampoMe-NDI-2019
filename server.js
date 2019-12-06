@@ -58,4 +58,7 @@ io.on('connection', function(client) {
 
 server.listen(8080, function() {
   console.log('Server running on port 8080');
+  db.each("SELECT * FROM User_info", function(err, row) {
+    console.log(row);
+  });
 });
