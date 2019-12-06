@@ -32,11 +32,15 @@ app.use(session({
 //   console.log(req.sessionID)
 // });
 
+app.get('/', function(req, res) {
+  console.log("LoL");
+  console.log(req.sessionID);
+});
+
 io.on('connection', function(client) {
   // Comparer les infos à la BD
   // const uniqueId = uuid();
   console.log('New user is connected');
-  console.log(client.handshake.session);
   // console.log(client.sessionID);
   client.on('evtConnexion', function(data) {
     console.log('Session evt');
