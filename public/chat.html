@@ -2,81 +2,82 @@
 
 <html>
 
-<header></header>
+  <header></header>
 
-<body>
+  <body>
 
-     <h1 class="card-title text-center">CHAT</h1>
+    <h1 class="card-title text-center">CHAT</h1>
     <div class="container">
-        <div class="pre-scrollable" id="chatArea" style="max-height: 75vh"></div>
+      <div class="pre-scrollable" id="chatArea" style="max-height: 75vh"></div>
 
-    
-        <form id="chat_form" class="input-group">
-            <input id="input_area" type="text" class="form-control input-sm chat_input" placeholder="Write your message here..." />
-            <span class="input-group-btn">
-                <button class="btn btn-primary" id="btn-chat" type="submit">Send</button>
-            </span>
-        </form>
+
+      <form id="chat_form" class="input-group">
+        <input id="input_area" type="text" class="form-control input-sm chat_input" placeholder="Write your message here..." />
+        <span class="input-group-btn">
+          <button class="btn btn-primary" id="btn-chat" type="submit">Send</button>
+        </span>
+        <div class="form-group">
+          <input type="text" id="pseudo" class="form-control" placeholder="Pseudonyme" value="" />
+        </div>
+      </form>
     </div>
 
-<script src="resources/socket.io-client/dist/socket.io.js"></script>
-<script src="resources/jquery/dist/jquery.js"></script>
-<script src="resources/bootstrap/dist/js/bootstrap.js"></script>
-<script>
+    <script src="resources/socket.io-client/dist/socket.io.js"></script>
+    <script src="resources/jquery/dist/jquery.js"></script>
+    <script src="resources/bootstrap/dist/js/bootstrap.js"></script>
+    <script>
+      fetch("header.html")
+        .then(response => {
+          return response.text()
+        })
+        .then(data => {
+          document.querySelector("header").innerHTML = data;
+        });
 
-    fetch("header.html")
-      .then(response => {
-        return response.text()
-      })
-      .then(data => {
-        document.querySelector("header").innerHTML = data;
-    });
+      fetch("footer.html")
+        .then(response => {
+          return response.text()
+        })
+        .then(data => {
+          document.querySelector("footer").innerHTML = data;
+        });
+    </script>
+    <script>
+      var socket = io();
+      var inputArea = $('#input_area');
+      var chatArea = $('#chatArea');
+      var pseudoArea = $('#pseudo')
 
-    fetch("footer.html")
-      .then(response => {
-        return response.text()
-      })
-      .then(data => {
-        document.querySelector("footer").innerHTML = data;
-    });
-</script>
-<script>
-    var socket   = io();
-    var inputArea = $('#input_area');
-    var chatArea  = $('#chatArea');
+      socket.on('printLog', function(data) {
+        console.log(data);
+      });
 
-    socket.on('printLog', function(data) {
-        console.log(data);  
-    });
-    
-    socket.on('majChat', function(data) {
+      socket.on('majChat', function(data) {
 
         console.log("majChat");
         console.log(data);
 
         var newCard = $('<div class = "card"></div>');
-
         chatArea.append(newCard);
-
         var cardContent = $('<div class = "card-body"></div>');
+        newCard.append(cardContent);
+        cardContent.html(cardContent.html() + data.pseudo + ": " + data.message);
 
-        newCard.append(cardContent); 
+      });
 
-        cardContent.html(cardContent.html()+ data.pseudo + ": " + data.message);
-
-    });
-
-    $('#chat_form').on('submit', function(e){
+      $('#chat_form').on('submit', function(e) {
         e.preventDefault();
         var msg = inputArea.val();
-        socket.emit('evt1', { pseudo:"Me", message:msg });
+        var pseudo = pseudoArea.val();
+        socket.emit('evt1', {
+          pseudo: pseudo,
+          message: msg
+        });
         console.log(msg);
         $('#chat_form')[0].reset();
-    });
-    
-</script>
-</body>
-<footer></footer>
+      });
+    </script>
+  </body>
+  <footer></footer>
+
 </html>
-
-
