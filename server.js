@@ -52,16 +52,16 @@ io.on('connection', function(client) {
   });
 
   client.on('evt1', function(data) {
-    app.get('/', function(req, res, next) {
+    // app.get('/', function(req, res, next) {
       console.log("app.get()");
-      if (req.session.views) {
+      // if (req.session.views) {
         // Si la session existe:
         console.log(data);
         data.pseudo = req.session.pseudo;
         console.log(data);
         io.emit('majChat', data);
-      } // Sinon:
-    });
+      // } // Sinon:
+    // });
   });
 
 });
