@@ -56,7 +56,6 @@ io.on('connection', function(client) {
   });
 
   client.on('evt1', function(data) {
-    console.log(sess);
     io.emit('majChat', data);
   });
 
