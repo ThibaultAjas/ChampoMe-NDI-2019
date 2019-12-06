@@ -57,7 +57,7 @@ io.on('connection', function(client) {
       // if (req.session.views) {
         // Si la session existe:
         console.log(data);
-        data.pseudo = req.session.pseudo;
+        // data.pseudo = req.session.pseudo;
         console.log(data);
         io.emit('majChat', data);
       // } // Sinon:
