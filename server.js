@@ -8,17 +8,17 @@ const cookieParser = require('cookie-parser');
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('mydb.db');
 
-var sess = {
-  genid: function(req) {
-    return genuuid() // use UUIDs for session IDs
-  },
-  secret: 'L\'ennui de l\'info 2019',
-  pseudo: '',
-  cookie: {
-    secure: true,
-    maxAge: 600000 // En ms
-  }
-}
+// var sess = {
+//   genid: function(req) {
+//     return genuuid() // use UUIDs for session IDs
+//   },
+//   secret: 'L\'ennui de l\'info 2019',
+//   pseudo: '',
+//   cookie: {
+//     secure: true,
+//     maxAge: 600000 // En ms
+//   }
+// }
 
 // app.set('trust proxy', 1) // trust first proxy
 // app.use(session({
@@ -28,31 +28,26 @@ var sess = {
 //   cookie: { secure: true }
 // }));
 
-
-
-
+app.use(express.static('public'));
+app.use('/resources', require('express').static(__dirname + '/node_modules/'));
 
 io.on('connection', function(client) {
-
   // Comparer les infos à la BD
-
   console.log('New user is connected');
-
   client.on('evtConnexion', function(data) {
     console.log('Session evt');
 
     db.serialize(function() {
-
       let sql = 'SELECT pseudo FROM User_info WHERE pseudo=? AND passwd=?';
-
       db.all(sql, [data.pseudo, data.password], function(err, rows) {
+
         if (err) {
           return console.error(err.message);
         }
+
         if (rows.length == 1) { // La combinaison pseudo/password existe dans la DB
           // On crée une session
           console.log("test");
-          sess.pseudo = data.pseudo;
           console.log(data);
         } // Sinon on ne crée pas de session
       });
@@ -63,18 +58,6 @@ io.on('connection', function(client) {
   client.on('evt1', function(data) {
     console.log(sess);
     io.emit('majChat', data);
-
-    /*
-      app.get('/', function(req, res, next) {
-        console.log("app.get()");
-        // if (req.session.views) {
-          // Si la session existe:
-          console.log(data);
-          // data.pseudo = req.session.pseudo;
-          console.log(data);
-          io.emit('majChat', data);
-        // } // Sinon:
-      });*/
   });
 
 });
