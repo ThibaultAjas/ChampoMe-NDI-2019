@@ -11,12 +11,13 @@ app.use(express.static('public'));
 app.use('/resources', require('express').static(__dirname + '/node_modules/'));
 
 
-app.configure(function(){
-  app.use(express.cookieParser());
-  app.use(express.session({secret: 'secret', keys: 'express.sid'}));
-  app.use(function(req, res) {
-    res.end('<h2>Hello, your session id is ' + req.sessionID + '</h2>');
-  });
+app.use(express.cookieParser());
+app.use(express.session({
+  secret: 'secret',
+  keys: 'express.sid'
+}));
+app.use(function(req, res) {
+  res.end('<h2>Hello, your session id is ' + req.sessionID + '</h2>');
 });
 
 app.listen();
