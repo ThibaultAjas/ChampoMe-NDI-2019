@@ -41,7 +41,8 @@ io.on('connection', function(client) {
   // const uniqueId = uuid();
   let handshake = client.handshake;
   console.log('New user is connected');
-  console.log(handshake);
+  // console.log(handshake);
+  console.log(client.sessionID);
   client.on('evtConnexion', function(data) {
     console.log('Session evt');
 
