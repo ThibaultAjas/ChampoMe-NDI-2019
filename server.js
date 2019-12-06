@@ -3,6 +3,7 @@ const app = express();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 const session = require('express-session');
+const cookieParser = require('cookie-parser');
 
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('mydb.db');
@@ -29,6 +30,18 @@ var sess = {
 
 app.use(express.static('public'));
 app.use('/resources', require('express').static(__dirname + '/node_modules/'));
+app.use(cookieParser());
+app.use(session({secret: "Shh, its a secret!"}));
+
+app.get('/', function(req, res){
+   if(req.session.page_views){
+      req.session.page_views++;
+      res.send("You visited this page " + req.session.page_views + " times");
+   } else {
+      req.session.page_views = 1;
+      res.send("Welcome to this page for the first time!");
+   }
+});
 
 io.on('connection', function(client) {
 
@@ -49,14 +62,8 @@ io.on('connection', function(client) {
         }
         if (rows.length == 1) { // La combinaison pseudo/password existe dans la DB
           // On crée une session
+          console.log("test");
           sess.pseudo = data.pseudo;
-          /*app.use(session({
-            secret: 'keyboard cat',
-            pseudo: data.pseudo,
-            cookie: {
-              maxAge: 600000
-            } // En ms
-          }));*/
           console.log(data);
         } // Sinon on ne crée pas de session
       });
