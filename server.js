@@ -29,6 +29,7 @@ io.on('connection', function(client) {
 
     db.serialize(function() {
       db.all("SELECT pseudo FROM User_info WHERE pseudo=" + data.pseudo + " AND passwd=" + data.passwd, function(err, rows) {
+        console.log(data);
         console.log(rows);
       });
     });
