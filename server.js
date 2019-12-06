@@ -10,6 +10,9 @@ const uuid = require('uuid/v4');
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('mydb.db');
 
+app.use(express.static('public'));
+app.use('/resources', require('express').static(__dirname + '/node_modules/'));
+
 // add & configure middleware
 app.use(session({
   genid: (req) => {
@@ -20,13 +23,12 @@ app.use(session({
   secret: "L'ennui de l'info",
   resave: false,
   saveUninitialized: true
-}))
-
-app.use(express.static('public'));
-app.use('/resources', require('express').static(__dirname + '/node_modules/'));
+}));
 
 io.use((socket, next) => {
   let handshake = socket.handshake;
+  let headers = socket.headers;
+  next();
 });
 
 // app.get('/chat', function(req, res){
@@ -40,7 +42,6 @@ io.on('connection', function(client) {
   let handshake = client.handshake;
   console.log('New user is connected');
   console.log(handshake);
-  console.log(handshake.url);
   client.on('evtConnexion', function(data) {
     console.log('Session evt');
 
