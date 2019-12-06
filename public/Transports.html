@@ -1,0 +1,93 @@
+<!doctype html>
+
+<html>
+<style>
+    .container {
+        padding-top: 1px;
+    }
+</style>
+<header></header>
+
+<body>
+    
+    <div class="container my-4 mx-4 bg-info">
+        <div class="row my-4">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header h3">
+                        Carte jeune SNCF
+                    </div>
+                    <div class="card-body">
+                        
+                        <p class="card-text">Pour permettre à tous de voyager au meilleur prix, SNCF lance de toutes nouvelles cartes de réduction adaptées aux envies de voyage de tous les clients.
+
+SNCF propose ainsi pour ses clients, 4 nouvelles cartes de réduction appelées "Cartes AVANTAGE" ainsi qu’une "carte LIBERTÉ". </p>
+                        <a href="https://www.oui.sncf/aide/les-cartes-avantage-et-liberte" class="card-link">Plus d'informations</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row my-4">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header h3">
+                        Carte élève apprenti SNCF
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text"> 
+                        Des réductions sur tous vos voyages <br>   
+                                • jusqu’à 9 trajets par mois où vous ne payez que la réservation
+                                <br>
+                                • -50%1 de réduction sur le plein tarif Loisir à partir du 10e trajet
+                                <br>
+                                • carte disponible en gare et boutique </p>
+                        <a href="https://www.sncf.com/fr/offres-voyageurs/cartes-tarifs-grandes-lignes/eleves-apprentis" class="card-link">Plus d'informations</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row my-4 py-4">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header h3">
+                        Réductions Tram/Métro
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">La rentrée, c'est pour tous les usagers l'heure du renouvellement de la carte d'abonnement aux transports urbains. Une charge qui pèse lourd dans les budgets des ménages, pas toujours en rapport avec le service fourni... Pour mesurer la qualité de ce service, notre classement des villes où il fait bon vivre prend en compte la fréquentation du réseau (nombre de voyages par habitant effectués sur le réseau). </p>
+                        <a href="https://www.lexpress.fr/emploi/gestion-carriere/les-villes-ou-on-circule-le-mieux-sans-voiture_2038242.html" class="card-link">Plus d'informations</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+<script src="resources/socket.io-client/dist/socket.io.js"></script>
+<script src="resources/jquery/dist/jquery.js"></script>
+<script src="resources/bootstrap/dist/js/bootstrap.js"></script>
+<script>
+
+    fetch("header.html")
+      .then(response => {
+        return response.text()
+      })
+      .then(data => {
+        document.querySelector("header").innerHTML = data;
+    });
+
+    fetch("footer.html")
+      .then(response => {
+        return response.text()
+      })
+      .then(data => {
+        document.querySelector("footer").innerHTML = data;
+    });
+</script>
+<script>
+
+    
+</script>
+</body>
+<footer></footer>
+</html>
+
+

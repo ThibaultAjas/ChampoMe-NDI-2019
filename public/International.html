@@ -1,0 +1,86 @@
+<!doctype html>
+
+<html>
+<style>
+    .container {
+        padding-top: 1px;
+    }
+</style>
+<header></header>
+
+<body>
+    
+    <div class="container my-4 mx-4 bg-info">
+        <div class="row my-4">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header h3">
+                        Visa
+                    </div>
+                    <div class="card-body">
+                        
+                        <p class="card-text">En tant que Français, aucun visa n'est exigé pour voyager en Europe (Espace économique européen et Suisse).
+Par contre, vous avez besoin d'un visa de court séjour pour la plupart des autres pays étrangers.</p>
+                        <a href="https://www.service-public.fr/particuliers/vosdroits/F1358" class="card-link">Plus d'informations</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row my-4">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header h3">
+                        Passeport Biométrique
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Pour faire un passeport biométrique, il faut le demander dans une mairie équipée avec les justificatifs nécessaires. Les documents dépendent de la situation : majeur ou mineur, première demande ou renouvellement.... Dans tous les cas, il faut fournir une photo, un justificatif de domicile et un timbre fiscal. En France, il coûte 86 € pour un majeur. Vous pouvez pré-remplir le dossier sur le site ants.gouv.fr. Le délai pour faire le passeport dépend de la période et du lieu. </p>
+                        <a href="https://www.service-public.fr/particuliers/vosdroits/N360" class="card-link">Plus d'informations</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row my-4 py-4">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header h3">
+                        Erasmus
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Depuis 2015, les établissements scolaires ont la possibilité de s’organiser en consortium, sous le statut ou le couvert d’un rectorat-Gip académique, d’une école supérieure du professorat et de l’éducation (ESPE) ou d’une direction des services départementaux de l’éducation, pour déposer un projet Erasmus +. </p>
+                        <a href="https://info.erasmusplus.fr/" class="card-link">Plus d'informations</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+<script src="resources/socket.io-client/dist/socket.io.js"></script>
+<script src="resources/jquery/dist/jquery.js"></script>
+<script src="resources/bootstrap/dist/js/bootstrap.js"></script>
+<script>
+
+    fetch("header.html")
+      .then(response => {
+        return response.text()
+      })
+      .then(data => {
+        document.querySelector("header").innerHTML = data;
+    });
+
+    fetch("footer.html")
+      .then(response => {
+        return response.text()
+      })
+      .then(data => {
+        document.querySelector("footer").innerHTML = data;
+    });
+</script>
+<script>
+
+    
+</script>
+</body>
+<footer></footer>
+</html>
+
+

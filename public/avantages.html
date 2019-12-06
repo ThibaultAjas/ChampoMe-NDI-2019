@@ -1,0 +1,118 @@
+<!doctype html>
+
+<html>
+<style>
+    .container {
+        padding-top: 1px;
+    }
+</style>
+<header></header>
+
+<body>
+    
+    <div class="container my-4 mx-4 bg-info">
+        <div class="row my-4">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header h3">
+                        Pass Culture
+                    </div>
+                    <div class="card-body">
+                        
+                        <p class="card-text">Le pass Culture est une application gratuite, qui révèle et relaie les possibilités culturelles et artistiques accessibles à proximité.
+Grâce à la géolocalisation, les citoyens peuvent repérer, choisir et réserver une grande diversité de biens et de propositions culturels, du concert au théâtre en passant par le livre, la pratique artistique et les jeux vidéos.</p>
+                        <a href="https://pass.culture.fr/" class="card-link">Plus d'informations</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row my-4">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header h3">
+                        Réduction dans de nombreux lieux de restauration
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text"> 
+                        De nombreux restaurants fast food (Macdo, Quick) offrent des produits supplémentaires pour l'achat d'un menu sur présentation de la carte étudiant. Il s'agit généralement d'une glace ou bien d'un sandwich. Attention, en règle générale ces offres ne sont pas valables durant le week end.
+La chaîne Subway, quant à elle, fait bénéficier les étudiants de 1€ de réduction sur l'achat de leur menu. </p>
+                        <a href="https://www.digischool.fr/vie-etudiante/financement-etudes/10-lieux-reduction-carte-etudiante-9916.html" class="card-link">Plus d'informations</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row my-4">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header h3">
+                        Réduction cinéma
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Les salles de cinéma offrent aux étudiants des réductions plus ou moins importantes en fonction de la ville et de la chaîne de cinémas. Par exemple, UGC propose des places de cinéma pour 5,90€ dans la ville de Bordeaux et pour 7,50€ dans les salles de cinéma de La Défense. La chaîne CGR pratique un tarif étudiant à 6,50€ dans la ville d'Auxerre. Les étudiants pourront acheter des places aux alentours de 7€ dans les salles Pathé. </p>
+                        <a href="https://www.digischool.fr/vie-etudiante/financement-etudes/10-lieux-reduction-carte-etudiante-9916.html" class="card-link">Plus d'informations</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row my-4">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header h3">
+                        Les musées
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Peu d'étudiants le savent mais de nombreux musées sont gratuits pour les moins de 26 ans et les étudiants. Au total 120 musées et monuments sont en accès libre pour les détenteurs de la carte étudiant dans toute la France. Il est donc possible de visiter les expositions permanentes du musée du Louvre, du musée des Arts Décoratifs, du musée d'Orsay ou encore du musée du Quai Branly. L'accès aux collections temporaires n'applique pas cette politique de gratuité. 
+Les musées qui ne sont pas libres d'accès offrent tout de même une réduction sur le tarif d'entrée. Vous pourrez ainsi obtenir un billet pour le musée Grévin pour la somme de 19€. Visiter le Palais de Tokyo vous coûtera 6€ 
+https://www.digischool.fr/vie-etudiante/financement-etudes/10-lieux-reduction-carte-etudiante-9916.html
+ </p>
+                        <a href="https://www.digischool.fr/vie-etudiante/financement-etudes/10-lieux-reduction-carte-etudiante-9916.html" class="card-link">Plus d'informations</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+         <div class="row my-4 py-4">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header h3">
+                        Sports
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Les salles de sport affichent souvent des prix d'abonnement assez élevés. Pour permettre aux jeunes de s'offrir des cours sans se ruiner, la plupart de centres de sport ont mis au point des formules étudiantes. L'abonnement annuel classique dans une salle oscille généralement entre 350 et 500€. Avec la carte étudiant, l'abonnement peut être payé entre 30% et 50% moins cher. 
+ </p>
+                        <a href="https://www.digischool.fr/vie-etudiante/financement-etudes/10-lieux-reduction-carte-etudiante-9916.html" class="card-link">Plus d'informations</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+<script src="resources/socket.io-client/dist/socket.io.js"></script>
+<script src="resources/jquery/dist/jquery.js"></script>
+<script src="resources/bootstrap/dist/js/bootstrap.js"></script>
+<script>
+
+    fetch("header.html")
+      .then(response => {
+        return response.text()
+      })
+      .then(data => {
+        document.querySelector("header").innerHTML = data;
+    });
+
+    fetch("footer.html")
+      .then(response => {
+        return response.text()
+      })
+      .then(data => {
+        document.querySelector("footer").innerHTML = data;
+    });
+</script>
+<script>
+
+    
+</script>
+</body>
+<footer></footer>
+</html>
+
+
