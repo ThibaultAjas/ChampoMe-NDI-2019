@@ -54,7 +54,6 @@ io.on('connection', function(client) {
   });
 
   // Sinon dire au client d'aller se faire foutre
-  db.close();
 });
 
 server.listen(8080, function() {
