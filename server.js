@@ -2,36 +2,41 @@ const express = require('express');
 const app = express();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
+const session = require('express-session');
 
-/*
-// Tuto sqlite: https://www.sqlitetutorial.net/sqlite-create-table/
-// Autre tuto: https://codeforgeek.com/node-sqlite-tutorial/
-var sqlite3 = require('sqlite3').verbose();
-var db = new sqlite3.Database('mydb.db');
-var check;
-db.serialize(function() {
+const sqlite3 = require('sqlite3').verbose();
+const db = new sqlite3.Database('mydb.db');
 
-  db.run("CREATE TABLE IF NOT EXISTS User_info (pseudo TEXT PRIMARY KEY, passwd TEXT, role TEXT)");
-  var stmt = db.prepare("INSERT INTO User_info VALUES (?, ?, ?)");
-  for (var i = 0; i < 10; i++) {
-      stmt.run("user" + i, "pass" + i, "utilisateur");
-  }
-  stmt.finalize();
-
-  db.each("SELECT pseudo, passwd, role FROM User_info", function(err, row) {
-      console.log(row.pseudo + ": " + row.passwd + ", " + row.role);
-  });
-});
-
-db.close();
-*/
+// app.set('trust proxy', 1) // trust first proxy
+// app.use(session({
+//   secret: 'keyboard cat',
+//   resave: false,
+//   saveUninitialized: true,
+//   cookie: { secure: true }
+// }));
 
 app.use(express.static('public'));
 app.use('/resources', require('express').static(__dirname + '/node_modules/'));
 
 io.on('connection', function(client) {
 
-  // console.log('New user is connected');
+  // Comparer les infos à la BD
+
+  console.log('New user is connected');
+
+  client.on('evtConnexion', function(data) {
+    console.log('Session evt');
+
+    db.serialize(function() {
+      db.all("SELECT pseudo FROM User_info WHERE pseudo=" + data.pseudo + " AND passwd=" + data.passwd, function(err, rows) {
+        console.log(rows);
+      });
+    });
+
+    db.close();
+
+  });
+  // Si c'est correct, lancer la session
 
   client.on('evt1', function(data) {
     console.log('Chat event');
@@ -40,6 +45,8 @@ io.on('connection', function(client) {
     client.emit('printLog', "Message reçu");
     io.emit('majChat', data);
   });
+
+  // Sinon dire au client d'aller se faire foutre
 
 });
 
