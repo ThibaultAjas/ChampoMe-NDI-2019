@@ -1,16 +1,27 @@
 <html>
-<script src="resources/socket.io-client/dist/socket.io.js"></script>
-<script src="resources/jquery/dist/jquery.js"></script>
-<script src="resources/bootstrap/dist/js/bootstrap.js"></script>
-<link rel="stylesheet" href="resources/bootstrap/dist/css/bootstrap.css"></script>
-
+<header>
+</header>
 <body>
 
-<h1>Hello World</h1>
-<a class="btn btn-primary" href="chat.html" role="button">Chat</a>
 </body>
 
 <script>
+	fetch("header.html")
+      .then(response => {
+        return response.text()
+      })
+      .then(data => {
+        document.querySelector("header").innerHTML = data;
+    });
+
+    fetch("footer.html")
+      .then(response => {
+        return response.text()
+      })
+      .then(data => {
+        document.querySelector("footer").innerHTML = data;
+    });
+
 	var socket = io.connect('http://51.83.252.165:8080');
 
 	socket.on('greeting', function(data) {
