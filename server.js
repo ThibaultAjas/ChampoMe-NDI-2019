@@ -3,7 +3,7 @@ const app = express();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 const cookieParser = require('cookie-parser');
-const session = require('express-session');
+const Session = require('express-session');
 const uuid = require('uuid/v4');
 
 const sqlite3 = require('sqlite3').verbose();
@@ -24,7 +24,7 @@ app.use(function(req, res) {
   console.log(req.sessionID);
 });
 
-var Session = require('connect').middleware.session.Session;
+// var Session = require('connect').middleware.session.Session;
 
 io.set('authorization', function(data, accept) {
   if (data.headers.cookie) {
