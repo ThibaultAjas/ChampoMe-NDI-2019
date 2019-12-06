@@ -5,58 +5,78 @@
   <head>
     <meta charset="UTF-8">
   </head>
-  <script src="resources/socket.io-client/dist/socket.io.js"></script>
-  <script src="resources/jquery/dist/jquery.js"></script>
+ <header></header>
 
   <body>
 
-    <form id="loginForm">
+    <!--<form id="loginForm">
       <input type="text" id="pseudo" required></input>
       <input type="password" id="passwd" required></input>
       <input type="submit" value="Connexion">
-    </form>
+    </form>-->
 
-    <div id="chatDiv">
+    <div class="container my-5" >
+      <div class="row justify-content-center align-items-center">
+        <div id="login-column" class="col-md-6">
+          <div id="login-box" class="col-md-12">
+                <h3 class="text-center text-info">Login</h3>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <input type="text" id="pseudo" class="form-control" placeholder="Pseudo" value="" />
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="passwd" class="form-control" placeholder="Mot de passe" value="" />
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary btn-lg btn-block" value="Login" />
+                    </div>
+                    <div class="form-group">
+                        <a href="#" class="ForgetPwd">Forget Password?</a>
+                    </div>
+                </form>
+              </div>
+            </div>
+        </div>
     </div>
+<script src="resources/socket.io-client/dist/socket.io.js"></script>
+<script src="resources/jquery/dist/jquery.js"></script>
+<script>
 
-    <form id="chatForm">
-      <textarea id="txtZone" name="entreeChat" rows=4 cols=40 placeholder="Entrez votre texte ..."></textarea>
-      <input type="submit" value="Envoyer"></input>
-    </form>
+    fetch("header.html")
+      .then(response => {
+        return response.text()
+      })
+      .then(data => {
+        document.querySelector("header").innerHTML = data;
+    });
+
+    fetch("footer.html")
+      .then(response => {
+        return response.text()
+      })
+      .then(data => {
+        document.querySelector("footer").innerHTML = data;
+    });
+</script>
+<script>
+  var socket = io();
+  var textZone = $('#txtZone');
+  var chatDiv = $('#chatDiv');
+
+  $('#loginForm').on('submit', function(e) {
+    e.preventDefault();
+    var pseudo = $('#pseudo').val();
+    var passwd = $('#passwd').val();
+    socket.emit('evtConnexion', {pseudo:pseudo, password: passwd})
+  });
+
+  socket.on('printLog', function(data) {
+    console.log(data);
+  });
+</script>
 
   </body>
-
-  <script>
-    var socket = io();
-    var textZone = $('#txtZone');
-    var chatDiv = $('#chatDiv');
-
-    $('#loginForm').on('submit', function(e) {
-      e.preventDefault();
-      var pseudo = $('#pseudo').val();
-      var passwd = $('#passwd').val();
-      socket.emit('evtConnexion', {pseudo:pseudo, password: passwd})
-    });
-
-    socket.on('printLog', function(data) {
-      console.log(data);
-    });
-
-    socket.on('majChat', function(data) {
-      console.log("majChat");
-      console.log(data);
-      chatDiv.html(chatDiv.html() + "<br/>" + data.pseudo + ": " + data.message);
-    });
-
-    $('#chatForm').on('submit', function(e) {
-      e.preventDefault();
-      var msg = textZone.val();
-      socket.emit('evt1', {
-        pseudo: "Me",
-        message: msg
-      });
-      console.log(msg);
-    });
-  </script>
-
+  <footer>
+  </footer>
+ 
 </html>
