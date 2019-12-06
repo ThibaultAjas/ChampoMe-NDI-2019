@@ -5,6 +5,8 @@ const io = require('socket.io')(server);
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 
+const uuid = require('uuid/v4');
+
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('mydb.db');
 
@@ -33,7 +35,8 @@ app.use('/resources', require('express').static(__dirname + '/node_modules/'));
 
 io.on('connection', function(client) {
   // Comparer les infos à la BD
-  console.log('New user is connected');
+  const uniqueId = uuid();
+  console.log('New user is connected ' + uniqueId);
   client.on('evtConnexion', function(data) {
     console.log('Session evt');
 
