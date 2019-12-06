@@ -25,7 +25,7 @@ app.use(session({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: true
-}))
+}));
 
 // app.get('/chat', function(req, res){
 //   console.log('app.get()');
@@ -36,7 +36,7 @@ io.on('connection', function(client) {
   // Comparer les infos à la BD
   // const uniqueId = uuid();
   console.log('New user is connected');
-  console.log(client.handshake.session;);
+  console.log(client.handshake.session);
   // console.log(client.sessionID);
   client.on('evtConnexion', function(data) {
     console.log('Session evt');
