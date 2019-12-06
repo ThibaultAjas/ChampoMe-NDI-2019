@@ -1,8 +1,9 @@
-var io = require('socket.io'),
-  express = require('express'),
-  app = express();
-// const app = express();
-// const server = require('http').createServer(app);
+const io = require('socket.io');
+const express = require('express');
+const app = express();
+const server = require('http').createServer(app);
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
 
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('mydb.db');
@@ -11,19 +12,23 @@ app.use(express.static('public'));
 app.use('/resources', require('express').static(__dirname + '/node_modules/'));
 
 
-app.use(express.cookieParser());
-app.use(express.session({
+app.use(cookieParser());
+app.use(session({
   secret: 'secret',
   keys: 'express.sid'
 }));
+
 app.use(function(req, res) {
   res.end('<h2>Hello, your session id is ' + req.sessionID + '</h2>');
 });
 
-app.listen();
-var sio = io.listen(app);
-sio.socket.on('connection', function(client) {
+io.on('connection', function(client) {
   console.log('New user is connected');
+});
+
+
+server.listen(8080, function() {
+  console.log('Server running on port 8080');
 });
 
 
