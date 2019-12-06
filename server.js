@@ -4,6 +4,7 @@ const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
+const FileStore = require('session-file-store')(session);
 
 const uuid = require('uuid/v4');
 
