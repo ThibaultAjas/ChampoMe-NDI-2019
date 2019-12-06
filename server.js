@@ -52,7 +52,7 @@ io.on('connection', function(client) {
   });
 
   client.on('evt1', function(data) {
-    app.get('/', function(req, res, next) {
+    io.get('/', function(req, res, next) {
       console.log("app.get()");
       // if (req.session.views) {
         // Si la session existe:
