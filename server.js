@@ -43,7 +43,7 @@ io.set('authorization', function(data, accept) {
 
 io.on('connection', function(client) {
   console.log('New user is connected');
-  onsole.log('A socket with sessionID ' + client.handshake.sessionID + ' connected!');
+  console.log('A socket with sessionID ' + client.handshake.sessionID + ' connected!');
 });
 
 
