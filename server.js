@@ -28,21 +28,40 @@ var sess = {
 //   cookie: { secure: true }
 // }));
 
-app.use(express.static('public'));
-app.use('/resources', require('express').static(__dirname + '/node_modules/'));
-app.use(cookieParser());
-app.use(session({secret: "Shh, its a secret!"}));
 
-app.get('/', function(req, res){
-  console.log("mlol");
-   if(req.session.page_views){
-      req.session.page_views++;
-      res.send("You visited this page " + req.session.page_views + " times");
+app.set('view engine', 'pug');
+app.set('views','./views');
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(upload.array());
+app.use(cookieParser());
+app.use(session({secret: "Your secret key"}));
+
+var Users = [];
+
+app.get('/signup', function(req, res){
+   res.render('signup');
+});
+
+app.post('/signup', function(req, res){
+   if(!req.body.id || !req.body.password){
+      res.status("400");
+      res.send("Invalid details!");
    } else {
-      req.session.page_views = 1;
-      res.send("Welcome to this page for the first time!");
+      Users.filter(function(user){
+         if(user.id === req.body.id){
+            res.render('signup', {
+               message: "User Already Exists! Login or choose another user id"});
+         }
+      });
+      var newUser = {id: req.body.id, password: req.body.password};
+      Users.push(newUser);
+      req.session.user = newUser;
+      res.redirect('/protected_page');
    }
 });
+
 app.listen(3000);
 
 io.on('connection', function(client) {
