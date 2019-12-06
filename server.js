@@ -31,6 +31,7 @@ io.on('connection', function(client) {
   client.on('evt1', function(data) {
     // Dès qu'un message est reçu par le serveur, on le transmet à tous les clients
     io.emit('majChat', data);
+    console.log(data);
   });
 
 });
