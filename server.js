@@ -27,21 +27,10 @@ var sess = {
 //   saveUninitialized: true,
 //   cookie: { secure: true }
 // }));
-var sess = {
-  secret: 'keyboard cat',
-  cookie: {}
-}
-
-if (app.get('env') === 'production') {
-  app.set('trust proxy', 1) // trust first proxy
-  sess.cookie.secure = true // serve secure cookies
-}
-
-app.use(session(sess))
 
 
 
-app.listen(3000);
+
 
 io.on('connection', function(client) {
 
