@@ -27,12 +27,6 @@ app.use(session({
   saveUninitialized: true
 }))
 
-io.use((socket, next) => {
-  let handshake = socket.handshake;
-  // let headers = socket.headers;
-  // next();
-});
-
 // app.get('/chat', function(req, res){
 //   console.log('app.get()');
 //   console.log(req.sessionID)
@@ -41,9 +35,8 @@ io.use((socket, next) => {
 io.on('connection', function(client) {
   // Comparer les infos à la BD
   // const uniqueId = uuid();
-  let handshake = client.handshake;
   console.log('New user is connected');
-  console.log(handshake);
+  console.log(client.handshake.session;);
   // console.log(client.sessionID);
   client.on('evtConnexion', function(data) {
     console.log('Session evt');
