@@ -30,7 +30,7 @@ app.use(session({
 io.use((socket, next) => {
   let handshake = socket.handshake;
   // let headers = socket.headers;
-  next();
+  // next();
 });
 
 // app.get('/chat', function(req, res){
