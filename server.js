@@ -31,12 +31,12 @@ io.on('connection', function(client) {
       let sql = 'SELECT pseudo FROM User_info WHERE pseudo=? AND passwd=?';
       db.all(sql, [data.pseudo, data.passwd], function(err, rows) {
         if (err) throw err;
+        console.log("data:");
         console.log(data);
+        console.log("rows");
         console.log(rows);
       });
     });
-
-    db.close();
 
   });
   // Si c'est correct, lancer la session
@@ -50,7 +50,7 @@ io.on('connection', function(client) {
   });
 
   // Sinon dire au client d'aller se faire foutre
-
+  db.close();
 });
 
 server.listen(8080, function() {
