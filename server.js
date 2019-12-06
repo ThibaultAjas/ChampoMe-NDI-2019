@@ -21,6 +21,7 @@ app.use(session({
 app.use(function(req, res) {
   res.end('<h2>Hello, your session id is ' + req.sessionID + '</h2>');
   console.log(req.sessionID);
+  console.log(req.keys);
 });
 
 io.on('connection', function(client) {
@@ -61,8 +62,4 @@ server.listen(8080, function() {
 //     io.emit('majChat', data);
 //   });
 //
-// });
-
-// server.listen(8080, function() {
-//   console.log('Server running on port 8080');
 // });
