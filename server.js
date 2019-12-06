@@ -10,33 +10,30 @@ const uuid = require('uuid/v4');
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('mydb.db');
 
-// var sess = {
-//   genid: function(req) {
-//     return genuuid() // use UUIDs for session IDs
-//   },
-//   secret: 'L\'ennui de l\'info 2019',
-//   pseudo: '',
-//   cookie: {
-//     secure: true,
-//     maxAge: 600000 // En ms
-//   }
-// }
-
-// app.set('trust proxy', 1) // trust first proxy
-// app.use(session({
-//   secret: 'keyboard cat',
-//   resave: false,
-//   saveUninitialized: true,
-//   cookie: { secure: true }
-// }));
+// add & configure middleware
+app.use(session({
+  genid: (req) => {
+    console.log('Inside the session middleware')
+    console.log(req.sessionID)
+    return uuid() // use UUIDs for session IDs
+  },
+  secret: "L'ennui de l'info",
+  resave: false,
+  saveUninitialized: true
+}))
 
 app.use(express.static('public'));
 app.use('/resources', require('express').static(__dirname + '/node_modules/'));
 
+app.get('/', function(req, res){
+  console.log('app.get()');
+  console.log(req.sessionID)
+});
+
 io.on('connection', function(client) {
   // Comparer les infos à la BD
-  const uniqueId = uuid();
-  console.log('New user is connected ' + uniqueId);
+  // const uniqueId = uuid();
+  console.log('New user is connected');
   client.on('evtConnexion', function(data) {
     console.log('Session evt');
 
