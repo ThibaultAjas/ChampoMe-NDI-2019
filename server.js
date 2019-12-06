@@ -40,6 +40,7 @@ io.on('connection', function(client) {
   let handshake = client.handshake;
   console.log('New user is connected');
   console.log(handshake);
+  console.log(handshake.url);
   client.on('evtConnexion', function(data) {
     console.log('Session evt');
 
