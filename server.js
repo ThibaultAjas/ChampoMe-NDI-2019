@@ -20,10 +20,11 @@ app.use(session({
     console.log(req.sessionID)
     return uuid() // use UUIDs for session IDs
   },
-  secret: "L'ennui de l'info",
+  store: new FileStore(),
+  secret: 'keyboard cat',
   resave: false,
   saveUninitialized: true
-}));
+}))
 
 io.use((socket, next) => {
   let handshake = socket.handshake;
