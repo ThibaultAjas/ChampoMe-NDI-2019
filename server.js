@@ -27,21 +27,17 @@ app.use(session({
   saveUninitialized: true
 }));
 
-// app.get('/chat', function(req, res){
-//   console.log('app.get()');
-//   console.log(req.sessionID)
-// });
-
-app.get('/', function(req, res) {
-  console.log("LoL");
-  console.log(req.sessionID);
+io.use((socket, next) => {
+  let handshake = socket.handshake;
+  let sessionID = socket.sessionID;
 });
 
 io.on('connection', function(client) {
   // Comparer les infos à la BD
   // const uniqueId = uuid();
+  let sessionID = client.sessionID;
   console.log('New user is connected');
-  // console.log(client.sessionID);
+  console.log(sessionID);
   client.on('evtConnexion', function(data) {
     console.log('Session evt');
 
