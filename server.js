@@ -6,7 +6,10 @@ const session = require('express-session');
 
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('mydb.db');
-
+var sess = {
+  secret: 'keyboard cat',
+  pseudo: '',
+} // En ms
 // app.set('trust proxy', 1) // trust first proxy
 // app.use(session({
 //   secret: 'keyboard cat',
@@ -37,13 +40,14 @@ io.on('connection', function(client) {
         }
         if (rows.length == 1) { // La combinaison pseudo/password existe dans la DB
           // On crée une session
-          app.use(session({
+          sess.pseudo = data.pseudo;
+          /*app.use(session({
             secret: 'keyboard cat',
             pseudo: data.pseudo,
             cookie: {
               maxAge: 600000
             } // En ms
-          }));
+          }));*/
           console.log(data);
         } // Sinon on ne crée pas de session
       });
@@ -52,16 +56,20 @@ io.on('connection', function(client) {
   });
 
   client.on('evt1', function(data) {
-    io.get('/', function(req, res, next) {
-      console.log("app.get()");
-      // if (req.session.views) {
-        // Si la session existe:
-        console.log(data);
-        // data.pseudo = req.session.pseudo;
-        console.log(data);
-        io.emit('majChat', data);
-      // } // Sinon:
-    });
+    console.log(sess);
+    io.emit('majChat', data);
+
+    /*
+      app.get('/', function(req, res, next) {
+        console.log("app.get()");
+        // if (req.session.views) {
+          // Si la session existe:
+          console.log(data);
+          // data.pseudo = req.session.pseudo;
+          console.log(data);
+          io.emit('majChat', data);
+        // } // Sinon:
+      });*/
   });
 
 });
