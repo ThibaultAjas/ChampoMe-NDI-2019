@@ -1,0 +1,25 @@
+body {
+	background-image: url("../images/rib.jpg");
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+
+#blocPage {
+	width: 80%;
+	margin: auto;
+	font-size: 30px;
+	text-align: center;
+	margin-top: 30px;
+}
+
+#formulaire {
+	display: flex;
+	justify-content: flex-start;
+	margin-top: 40%;
+	padding-left: 30px;
+}
+
+iframe {
+	border: none;
+	width: 100%;
+}

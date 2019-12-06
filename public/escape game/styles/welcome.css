@@ -1,0 +1,28 @@
+body {
+	background-color: #424242;
+	color: #fff;
+}
+
+#blocPage {
+	width: 80%;
+	margin: auto;
+	margin-top: 50px;
+	
+	text-align: center;
+	justify-content: center;
+}
+
+#rules {
+	padding-top: 200px;
+	font-size: 30px;
+}
+
+#playButton {
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+iframe {
+	border: none;
+	width: 100%;
+}
