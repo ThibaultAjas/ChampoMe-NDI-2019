@@ -6,10 +6,19 @@ const session = require('express-session');
 
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('mydb.db');
+
 var sess = {
-  secret: 'keyboard cat',
+  genid: function(req) {
+    return genuuid() // use UUIDs for session IDs
+  },
+  secret: 'L\'ennui de l\'info 2019',
   pseudo: '',
-} // En ms
+  cookie {
+    secure: true,
+    maxAge: 600000 // En ms
+  }
+}
+
 // app.set('trust proxy', 1) // trust first proxy
 // app.use(session({
 //   secret: 'keyboard cat',
