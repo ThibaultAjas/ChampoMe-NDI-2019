@@ -16,10 +16,11 @@
         <span class="input-group-btn">
           <button class="btn btn-primary" id="btn-chat" type="submit">Send</button>
         </span>
-        <div class="form-group">
-          <input type="text" id="pseudo" class="form-control" placeholder="Pseudonyme" value="" />
-        </div>
       </form>
+    </div>
+
+    <div class="form-group">
+      <input type="text" id="pseudo" class="form-control" placeholder="Pseudonyme" value="" />
     </div>
 
     <script src="resources/socket.io-client/dist/socket.io.js"></script>
@@ -74,7 +75,7 @@
           message: msg
         });
         console.log(msg);
-        $('#input_area').reset();
+        $('#chat_form')[0].reset();
       });
     </script>
   </body>
