@@ -25,15 +25,21 @@ app.use(session({
 app.use(express.static('public'));
 app.use('/resources', require('express').static(__dirname + '/node_modules/'));
 
-app.get('/', function(req, res){
-  console.log('app.get()');
-  console.log(req.sessionID)
+io.use((socket, next) => {
+  let handshake = socket.handshake;
 });
+
+// app.get('/chat', function(req, res){
+//   console.log('app.get()');
+//   console.log(req.sessionID)
+// });
 
 io.on('connection', function(client) {
   // Comparer les infos à la BD
   // const uniqueId = uuid();
+  let handshake = client.handshake;
   console.log('New user is connected');
+  console.log(handshake);
   client.on('evtConnexion', function(data) {
     console.log('Session evt');
 
