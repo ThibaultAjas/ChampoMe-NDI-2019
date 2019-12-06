@@ -42,6 +42,7 @@ app.get('/', function(req, res){
       res.send("Welcome to this page for the first time!");
    }
 });
+app.listen(3000);
 
 io.on('connection', function(client) {
 
